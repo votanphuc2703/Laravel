@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\MovieModel;
+use App\Models\RoomModel;
 
-class MovieController extends Controller
+class RoomController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $data=MovieModel::all();
+        $data=RoomModel::all();
         if($data){
             return response()->json(['data'=>$data,200]);
         }else{
@@ -31,7 +31,6 @@ class MovieController extends Controller
     public function create()
     {
         //
-        
     }
 
     /**
@@ -42,8 +41,8 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        $d=$request->only('nameMovie','introductionMovie','descriptionMovie','caster','director','genreMovie','countryMovie','releaseDate','minAge','image','imageList','linkTrailer','priceSingleSeat','priceDouble','active');
-        $data=MovieModel::create($d);
+        $d=$request->only('name','active','idTheater');
+        $data=RoomModel::create($d);
         if($data){
             return response()->json(['data'=>$data,200]);
         }else{
@@ -59,7 +58,7 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        $data=MovieModel::whereId($id)->first();
+        $data=RoomModel::whereId($id)->first();
         if($data){
             return response()->json(['data'=>$data,200]);
         }else{
@@ -75,7 +74,7 @@ class MovieController extends Controller
      */
     public function edit($id)
     {
-        $data=MovieModel::whereId($id)->first();
+        $data=RoomModel::whereId($id)->first();
         if($data){
             return response()->json(['data'=>$data,200]);
         }else{
@@ -92,8 +91,8 @@ class MovieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $d=$request->only('nameMovie','introductionMovie','descriptionMovie','caster','director','genreMovie','countryMovie','releaseDate','minAge','image','imageList','linkTrailer','priceSingleSeat','priceDouble','active');
-        $data=MovieModel::whereId($id)->update($d);
+        $d=$request->only('name','active','idTheater');
+        $data=RoomModel::whereId($id)->update($d);
         if($data){
             return response()->json(['data'=>$data,200]);
         }else{
@@ -109,7 +108,7 @@ class MovieController extends Controller
      */
     public function destroy($id)
     {
-        $data=MovieModel::whereId($id)->delete();
+        $data=RoomModel::whereId($id)->delete();
         if($data){
             return response()->json(['data'=>$data,200]);
         }else{
